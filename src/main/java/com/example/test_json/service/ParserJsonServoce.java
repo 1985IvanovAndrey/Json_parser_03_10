@@ -4,10 +4,7 @@ import com.example.test_json.controller.Dto.ParserDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import jdk.nashorn.internal.ir.RuntimeNode;
 import lombok.extern.log4j.Log4j2;
 import org.omg.PortableInterceptor.ServerRequestInfo;
@@ -89,9 +86,24 @@ public class ParserJsonServoce {
 
     public void getFieldFromJson4(String json) throws IOException {
         String json1 = "{ \"f1\":\"Hello\",\"f2\":{\"f3:\":\"World\"}}";
-        JsonElement jsonElement=new JsonParser().parse(json1);
-        JsonObject jsonObject=jsonElement.getAsJsonObject();
+        JsonElement jsonElement = new JsonParser().parse(json1);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
         System.out.println(jsonObject.get("f2").getAsJsonObject().get("f3:"));
+
+    }
+
+    public void getFieldFromJson5(String json) throws IOException {
+        log.info(json);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = objectMapper.readTree(json);
+        ArrayNode arrayNode = (ArrayNode) node;
+        // System.out.println(arrayNode.get(0).get("text"));
+        // System.out.println(arrayNode.get(1).get("text"));
+        JsonNode user1 = arrayNode.get(0).get("user");
+        System.out.println(user1.get("name"));
+        for (JsonNode jsonNode : arrayNode) {
+            System.out.println(jsonNode.get("id"));
+        }
 
     }
 }

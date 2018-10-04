@@ -40,4 +40,10 @@ public class StartRestController {
         parserJsonServoce.getFieldFromJson4(json);
         return "ok";
     }
+    @PostMapping("/five")
+    public String method5(@RequestBody String json)throws IOException{
+        parserJsonServoce.getFieldFromJson5(json);
+        return "ok";
+
+    }
 }
