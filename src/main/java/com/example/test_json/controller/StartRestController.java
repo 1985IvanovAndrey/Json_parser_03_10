@@ -16,17 +16,17 @@ public class StartRestController {
     @Autowired
     private ParserJsonServoce parserJsonServoce;
 
-    @PostMapping("/one")
+    @PostMapping("/one")// парсит json1
     public String method1(@RequestBody String json) throws IOException {
         parserJsonServoce.getFieldFromJson1(json);
         return "ok";
     }
-    @PostMapping("/two")
+    @PostMapping("/two")// парсит json1
     public String method2(@RequestBody String json) throws IOException {
         parserJsonServoce.getFieldFromJson2(json);
         return "ok";
     }
-    @PostMapping("/three")
+    @PostMapping("/three")// парсит json1
     public String method3(@RequestBody ParserDto parserDto) throws IOException {
        try{
            parserJsonServoce.getFieldFromJson3(parserDto);
@@ -35,15 +35,19 @@ public class StartRestController {
        }
         return "ok";
     }
-    @PostMapping("/four")
-    public String method4(@RequestBody String json) throws IOException {
-        parserJsonServoce.getFieldFromJson4(json);
+    @GetMapping ("/four")// парсит статическую строку
+    public String method4() throws IOException {
+        parserJsonServoce.getFieldFromJson4();
         return "ok";
     }
-    @PostMapping("/five")
+    @PostMapping("/five")// парсит json2
     public String method5(@RequestBody String json)throws IOException{
         parserJsonServoce.getFieldFromJson5(json);
         return "ok";
 
+    }
+    @GetMapping("/json")// создаёт json
+    public Object gsontTestGet() {
+        return parserJsonServoce.createJson();
     }
 }
